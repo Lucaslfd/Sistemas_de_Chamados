@@ -1,13 +1,22 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom'; 
 
 import './singin.css';
-import logo from '../../assets/logo.png'
-
+import logo from '../../assets/logo.png';
+import { AuthContext } from '../../contexts/auth';
 
 export default function SingIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const { singIn } = useContext(AuthContext)
+
+    function handleSingIn(event) {
+        event.preventDefault();
+        if (email !== '' && password !== ''){
+            singIn(email, password);
+        }
+    }
 
     return(
         <div className='container-center'>
@@ -16,7 +25,7 @@ export default function SingIn() {
                     <img src={logo} alt='Logo da tela de cadastro'/>
                 </div>
 
-                <form>
+                <form onSubmit={handleSingIn}>
                     <h1>Entrar</h1>
                     <input 
                     type='email' 

@@ -10,6 +10,13 @@ export default function SingUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    function handleSubmit(event) {
+        event.preventDefault();
+        if (name !== '' && email !== '' && password !== ''){
+            
+        }
+    }
+
     return(
         <div className='container-center'>
             <div className='login'>
@@ -17,8 +24,8 @@ export default function SingUp() {
                     <img src={logo} alt='Logo da tela de cadastro'/>
                 </div>
 
-                <form>
-                    <h1>Entrar</h1>
+                <form onSubmit={handleSubmit}>
+                    <h1>Cadastre-se</h1>
                     <input 
                     type='text' 
                     placeholder='Nome'
