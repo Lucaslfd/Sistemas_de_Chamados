@@ -1,19 +1,20 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom'; 
 
 import logo from '../../assets/logo.png';
 import '../SingIn/singin.css'
-
+import { AuthContext } from '../../contexts/auth';
 
 export default function SingUp() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { singUp, loadingAuth } = useContext(AuthContext);
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         if (name !== '' && email !== '' && password !== ''){
-            
+            await singUp(email, password, name);
         }
     }
 
@@ -46,7 +47,7 @@ export default function SingUp() {
                     onChange={ (e) => setPassword(e.target.value) }
                     />
 
-                    <button type='submit' >Cadastrar</button>
+                    <button type='submit' >{ loadingAuth ? 'Carregando' : 'Cadastrar'}</button>
                     
                 </form>
 
